@@ -9,7 +9,6 @@ import Header from "./Header";
 import Landing from './Landing'
 import Dashboard from './Dashboard'
 import SurveyNew from './SurveyNew'
-// const App = () =>   ----Functional component
 
 class App extends Component {
     componentDidMount() {

@@ -1,14 +1,17 @@
 import PlaceHolder from './Placeholder'
 import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-const FormSurvey = () => {
+const Dashboard = () => {
     return (
         <div style={{ textAlign: "center" }}>
             <h1>Welcome to your Dashboard</h1>
-                <Link to='/surveys/new'>Add Survey</Link>
+                <Button variant="danger"><Link to='/surveys/new'><FontAwesomeIcon icon={faPlus} className="color"/></Link></Button> 
             <PlaceHolder />
         </div>
     )
 }
 
-export default FormSurvey
+export default Dashboard
