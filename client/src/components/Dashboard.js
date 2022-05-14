@@ -8,7 +8,11 @@ const Dashboard = () => {
     return (
         <div style={{ textAlign: "center" }}>
             <h1>Welcome to your Dashboard</h1>
-                <Button variant="danger"><Link to='/surveys/new'><FontAwesomeIcon icon={faPlus} className="color"/></Link></Button> 
+                <Button variant="danger">
+                    <Link to='/surveys/new'>
+                        <FontAwesomeIcon icon={faPlus} className="color"/>
+                    </Link>
+                </Button> 
             <PlaceHolder />
         </div>
     )
