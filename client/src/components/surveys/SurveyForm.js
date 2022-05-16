@@ -1,10 +1,11 @@
 import _ from 'lodash'
 import React, {Component} from "react";
 import { Fragment } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, destroy } from 'redux-form'
 import { Link } from 'react-router-dom';
 import SurveyField from "./SurveyField";
 import validateEmails from '../../utilities/validateEmails';
+import formFields from './formFields';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -12,16 +13,9 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
-const FIELDS = [
-    { label: 'Survey Title', name: 'title' },
-    { label: 'Subject Line', name: 'subject' },
-    { label: 'Email Body', name: 'body' },
-    { label: 'Recipient List', name: 'emails' }
-]
-
 class SurveyForm extends Component {
     renderFields() {
-        return _.map(FIELDS, ({ label, name }) => {
+        return _.map(formFields, ({ label, name }) => {
             return <Field key={name} component={SurveyField} type="text" label={label} name={name} />
         })
     }
@@ -29,10 +23,10 @@ class SurveyForm extends Component {
     render() {
         return (
             <Fragment>
-                <Form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+                <Form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
                     {this.renderFields()}
                     <Link to='/surveys' className='btn btn-danger btn-mt'>Cancel</Link>
-                    <Button type="submit" className='btn-submit btn-mt' variant="success"> 
+                    <Button type="submit" className='btn-mt flt-r' variant="success"> 
                         Next &nbsp;
                         <FontAwesomeIcon icon={faCheck} />
                     </Button>
@@ -45,9 +39,9 @@ class SurveyForm extends Component {
 const validate = (values) => {
     const errors = {}
 
-    errors.emails = validateEmails(values.emails || '')
+    errors.recipients = validateEmails(values.recipients || '')
 
-    _.each(FIELDS, ({ name }) => {
+    _.each(formFields, ({ name }) => {
         if (!values[name]) {
             errors[name] = 'Must provide value'
         }
@@ -58,5 +52,6 @@ const validate = (values) => {
 
 export default reduxForm({
     validate,
-    form: 'surveyForm'
+    form: 'surveyForm',
+    destroyOnUnmount: false
 }) (SurveyForm)

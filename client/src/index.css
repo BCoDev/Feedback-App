@@ -2,14 +2,18 @@ Navbar Link {
     color: #fff;
     text-decoration: none !important;
 }
-a:visited {
-    /* color: #fff; */
+a {
+    color: #fff;
     text-decoration: none;
 }
-.color{
+a:hover {
+    color: darkmagenta;
+}
+.text-white {
     color: #fff;
 }
-Link:visited .color{
+
+Link:visited {
     color: #fff;
     text-decoration: none;
 }
@@ -29,7 +33,7 @@ label{
     color: #6c6c6c;
 }
 
-.btn-submit {
+.flt-r {
     float: right;
 }
 

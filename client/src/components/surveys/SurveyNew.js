@@ -1,18 +1,32 @@
 import React, {Component} from "react";
 import { Fragment } from 'react'
+import { reduxForm } from "redux-form";
 import SurveyForm from "./SurveyForm";
+import SurveyFormReview from "./SurveyFormReview"
+
 
 class SurveyNew extends Component {
+    state = { showFormReview: false }
+
+    renderContent() {
+        if (this.state.showFormReview === true) {
+            return <SurveyFormReview onCancel={() => this.setState({ showFormReview: false})} />
+        }
+        return <SurveyForm onSurveySubmit={() => this.setState({showFormReview: true})} />
+    }
+
     render() {
         return (
         <Fragment>
-            <SurveyForm />
+            {this.renderContent()}
         </Fragment>
         )
     }
 }
 
-export default SurveyNew
+export default reduxForm({
+    form: 'surveyForm'
+})(SurveyNew)
 
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
